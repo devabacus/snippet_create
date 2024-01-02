@@ -8,8 +8,6 @@ snippets = {
     "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
 }
 
-content_window = None
-
 def on_press(key):
     global typed_keys
     try:
@@ -20,16 +18,8 @@ def on_press(key):
         typed_keys = ''
 
 def update_snippet_content(snippet_key):
-    global content_window
-    if content_window:
-        content_window.destroy()
-    content_window = tk.Toplevel(root)
-    content = tk.Text(content_window, height=10, width=40)
+    content.delete('1.0', tk.END)
     content.insert(tk.END, snippets[snippet_key])
-    content.pack()
-    x = popup.winfo_x() + popup.winfo_width()
-    y = popup.winfo_y()
-    content_window.geometry(f"+{x}+{y}")
 
 def on_select(event):
     index = listbox.curselection()
@@ -43,28 +33,28 @@ def insert_snippet():
         selected_snippet = listbox.get(index)
         pyautogui.hotkey('alt', 'tab')
         pyautogui.press('backspace', presses=4)
-        pyautogui.write(snippets[selected_snippet],0.01)
+        pyautogui.write(snippets[selected_snippet])
         popup.destroy()
-        if content_window:
-            content_window.destroy()
 
 def show_popup():
-    global popup, listbox
+    global popup, listbox, content
     x, y = pyautogui.position()
     popup = tk.Toplevel(root)
-    # popup.overrideredirect(True)
-    popup.geometry(f"200x100+{x}+{y}")
+    popup.geometry(f"400x200+{x}+{y}")
     listbox = tk.Listbox(popup)
     for key in snippets.keys():
         listbox.insert(tk.END, key)
     listbox.bind('<<ListboxSelect>>', on_select)
-    listbox.pack()
+    listbox.pack(side=tk.LEFT, fill=tk.Y)
+    content = tk.Text(popup, height=10, width=40)
+    content.pack(side=tk.RIGHT, fill=tk.Y)
     listbox.select_set(0)
     on_select(None)
     popup.bind('<Return>', lambda e: insert_snippet())
     popup.bind('<Escape>', lambda e: popup.destroy())
     popup.focus_force()  # Фокус на popup
     listbox.focus_set()  # Фокусируемся на listbox
+
 
 root = tk.Tk()
 root.withdraw()

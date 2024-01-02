@@ -44,6 +44,13 @@ def pynput_key_press(key):
     keyboard_controller.press(key)
     keyboard_controller.release(key)
         
+def pynput_shortcut(key1, key2):
+    keyboard_controller.press(key1)
+    keyboard_controller.press(key2)
+    keyboard_controller.release(key1)
+    keyboard_controller.release(key2)
+
+        
 def insert_snippet():
     index = listbox.curselection()
     if index:
@@ -51,10 +58,7 @@ def insert_snippet():
         snippet_text = snippets[selected_snippet]
 
         # Имитация Alt+Tab для смены фокуса на окно редактора
-        keyboard_controller.press(Key.alt)
-        keyboard_controller.press(Key.tab)
-        keyboard_controller.release(Key.tab)
-        keyboard_controller.release(Key.alt)
+        pynput_shortcut(Key.alt, Key.tab)
 
         # Удаление триггера 'trig'
         for _ in range(5):

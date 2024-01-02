@@ -3,6 +3,7 @@ from pynput.keyboard import Key, Controller
 import tkinter as tk
 import pyautogui
 import win32gui
+import test_os
 
 typed_keys = ''
 snippets = {
@@ -10,20 +11,8 @@ snippets = {
     "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
 }
 
-
-
-
 ctrl_pressed = False
 keyboard_controller = Controller()
-
-def get_active_window_title():
-    hwnd = win32gui.GetForegroundWindow()
-    return win32gui.GetWindowText(hwnd)
-
-def snippet_activated()->None:
-    window_title = get_active_window_title()
-    
-    print("Активное окно:", window_title)
 
 def on_press(key):
     global typed_keys, ctrl_pressed
@@ -32,8 +21,10 @@ def on_press(key):
             ctrl_pressed = True
         elif key == Key.space and ctrl_pressed:
             
-            snippet_activated()
-            show_popup()
+            filePath = test_os.pick_snippet_csv_file()
+            if len(filePath) != 0:
+                if test_os.get_snippets_map(filePath, 'sidd'):
+                    show_popup()
             ctrl_pressed =False
         typed_keys += key.char
         # if typed_keys.endswith('trig'):

@@ -40,6 +40,10 @@ def insert_snippet1():
         popup.destroy()
         
         
+def pynput_key_press(key):
+    keyboard_controller.press(key)
+    keyboard_controller.release(key)
+        
 def insert_snippet():
     index = listbox.curselection()
     if index:
@@ -54,17 +58,14 @@ def insert_snippet():
 
         # Удаление триггера 'trig'
         for _ in range(5):
-            keyboard_controller.press(Key.backspace)
-            keyboard_controller.release(Key.backspace)
+            pynput_key_press(Key.backspace)
         
         # Ввод сниппета
         for char in snippet_text:
             if char == "\n":
-                keyboard_controller.press(Key.enter)
-                keyboard_controller.release(Key.enter)
+                pynput_key_press(Key.enter)
             else:
-                keyboard_controller.press(char)
-                keyboard_controller.release(char)
+                pynput_key_press(char)
         
         popup.destroy()
 

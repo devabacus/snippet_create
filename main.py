@@ -23,10 +23,15 @@ def on_press(key):
             
             filePath = test_os.pick_snippet_csv_file()
             if len(filePath) != 0:
-                if test_os.get_snippets_map(filePath, 'sidd'):
+                if test_os.get_snippets_map(filePath, typed_keys):
                     show_popup()
             ctrl_pressed =False
-        typed_keys += key.char
+        elif hasattr(key, 'char') and key.char:
+            if key.char.isalnum():
+                typed_keys += key.char
+                
+        else:
+            typed_keys = ''
         # if typed_keys.endswith('trig'):
         #     show_popup()
     except AttributeError:

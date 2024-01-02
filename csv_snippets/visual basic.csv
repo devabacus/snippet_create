@@ -1,3 +1,8 @@
 ﻿si,string init
 sig,string init sig
 sf,string format
+fi,Sub funcName() \n\t
+vd,Dim varName As typeName
+vi,Set varName = value
+if,If Condition Then\n\nEnd If
+ifel,If Condition Then\n\nElse\n\nEnd If

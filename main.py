@@ -1,3 +1,4 @@
+import time
 from pynput.keyboard import Listener
 from pynput.keyboard import Key, Controller
 import tkinter as tk
@@ -6,16 +7,17 @@ import win32gui
 import test_os
 
 typed_keys = ''
-snippets = {
-    "Snippet 1": "def function_name():\n    pass",
-    "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
-}
-
+typed_keys_ln = 0
+# snippets = {
+#     "Snippet 1": "def function_name():\n    pass",
+#     "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
+# }
+snippets:dict = {}
 ctrl_pressed = False
 keyboard_controller = Controller()
 
 def on_press(key):
-    global typed_keys, ctrl_pressed
+    global typed_keys, ctrl_pressed, snippets, typed_keys_ln
     try:
         if key == Key.ctrl_l:
             ctrl_pressed = True
@@ -24,11 +26,13 @@ def on_press(key):
             filePath = test_os.pick_snippet_csv_file()
             if len(filePath) != 0:
                 if test_os.get_snippets_map(filePath, typed_keys):
+                    snippets = test_os.get_snippets_map(filePath, typed_keys)
                     show_popup()
             ctrl_pressed =False
         elif hasattr(key, 'char') and key.char:
             if key.char.isalnum():
                 typed_keys += key.char
+                typed_keys_ln = len(typed_keys)
                 
         else:
             typed_keys = ''
@@ -67,6 +71,7 @@ def pynput_shortcut(key1, key2):
     keyboard_controller.release(key2)
         
 def insert_snippet():
+    global typed_keys_ln
     index = listbox.curselection()
     if index:
         selected_snippet = listbox.get(index)
@@ -76,15 +81,18 @@ def insert_snippet():
         pynput_shortcut(Key.alt, Key.tab)
 
         # Удаление триггера 'trig'
-        for _ in range(5):
+        for _ in range(typed_keys_ln+1):
             pynput_key_press(Key.backspace)
         
+        typed_keys_ln = 0
         # Ввод сниппета
         for char in snippet_text:
             if char == "\n":
                 pynput_key_press(Key.enter)
+                time.sleep(0.1)
             else:
                 pynput_key_press(char)
+                # pyautogui.write(char,interval=0)
         
         popup.destroy()
 

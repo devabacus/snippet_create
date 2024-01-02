@@ -25,7 +25,7 @@ def get_snippets_map(filePath:str, search_text:str)->None:
         reader = csv.reader(csvfile)
         for row in reader:
             if search_text in row[0]:
-                snippets[row[0]] = row[1]
+                snippets[row[0]] = row[1].replace("\\n", "\n").replace("\\t", "\t")
     print(f'найдено совпадения {snippets}')
     return snippets        
 

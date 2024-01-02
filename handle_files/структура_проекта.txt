@@ -1,0 +1,10 @@
+📁 snippet_create
+📄 .gitignore
+📁 csv_snippets
+    📄 arduino.csv
+    📄 visual basic.csv
+📄 handle.ps1
+📁 handle_files
+    📄 project_structure_print.py
+📄 main.py
+📄 test_os.py

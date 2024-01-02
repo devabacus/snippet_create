@@ -2,6 +2,7 @@ from pynput.keyboard import Listener
 from pynput.keyboard import Key, Controller
 import tkinter as tk
 import pyautogui
+import win32gui
 
 typed_keys = ''
 snippets = {
@@ -9,14 +10,34 @@ snippets = {
     "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
 }
 
+
+
+
+ctrl_pressed = False
 keyboard_controller = Controller()
 
+def get_active_window_title():
+    hwnd = win32gui.GetForegroundWindow()
+    return win32gui.GetWindowText(hwnd)
+
+def snippet_activated()->None:
+    window_title = get_active_window_title()
+    
+    print("Активное окно:", window_title)
+
 def on_press(key):
-    global typed_keys
+    global typed_keys, ctrl_pressed
     try:
-        typed_keys += key.char
-        if typed_keys.endswith('trig'):
+        if key == Key.ctrl_l:
+            ctrl_pressed = True
+        elif key == Key.space and ctrl_pressed:
+            
+            snippet_activated()
             show_popup()
+            ctrl_pressed =False
+        typed_keys += key.char
+        # if typed_keys.endswith('trig'):
+        #     show_popup()
     except AttributeError:
         typed_keys = ''
 
@@ -39,7 +60,6 @@ def insert_snippet1():
         pyautogui.write(snippets[selected_snippet])
         popup.destroy()
         
-        
 def pynput_key_press(key):
     keyboard_controller.press(key)
     keyboard_controller.release(key)
@@ -49,7 +69,6 @@ def pynput_shortcut(key1, key2):
     keyboard_controller.press(key2)
     keyboard_controller.release(key1)
     keyboard_controller.release(key2)
-
         
 def insert_snippet():
     index = listbox.curselection()

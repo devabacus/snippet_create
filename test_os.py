@@ -19,6 +19,14 @@ def pick_snippet_csv_file()->str:
             file_path = f'{folderName}/{csvFileName}'
     return file_path
 
+def pick_snippet_csv_files()->str:
+    window_program_name = get_window_name()
+    folderName = 'snippets'
+    file_path = ""
+    mlist:list = os.listdir(folderName) 
+    print(mlist)      
+    
+
 def get_snippets_map(filePath:str, search_text:str)->None:
     snippets:dict = {}
     with open(filePath, newline = '', encoding='utf-8-sig') as csvfile:

@@ -8,10 +8,6 @@ import test_os
 
 typed_keys = ''
 typed_keys_ln = 0
-# snippets = {
-#     "Snippet 1": "def function_name():\n    pass",
-#     "Snippet 2": "class ClassName:\n    def __init__(self):\n        pass",
-# }
 snippets:dict = {}
 ctrl_pressed = False
 keyboard_controller = Controller()
@@ -24,6 +20,7 @@ def on_press(key):
         elif key == Key.space and ctrl_pressed:
             
             filePath = test_os.pick_snippet_csv_file()
+            test_os.pick_snippet_csv_files()
             if len(filePath) != 0:
                 if test_os.get_snippets_map(filePath, typed_keys):
                     snippets = test_os.get_snippets_map(filePath, typed_keys)
@@ -114,7 +111,6 @@ def show_popup():
     popup.bind('<Escape>', lambda e: popup.destroy())
     popup.focus_force()  # Фокус на popup
     listbox.focus_set()  # Фокусируемся на listbox
-
 
 root = tk.Tk()
 root.withdraw()

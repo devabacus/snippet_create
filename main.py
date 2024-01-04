@@ -8,9 +8,10 @@ import test_os
 
 typed_keys = ''
 typed_keys_ln = 0
-snippets:dict = {}
+snippets: dict = {}
 ctrl_pressed = False
 keyboard_controller = Controller()
+
 
 def on_press(key):
     global typed_keys, ctrl_pressed, snippets, typed_keys_ln
@@ -18,19 +19,19 @@ def on_press(key):
         if key == Key.ctrl_l:
             ctrl_pressed = True
         elif key == Key.space and ctrl_pressed:
-            
+
             filePath = test_os.pick_snippet_csv_file()
-            test_os.pick_snippet_csv_files()
+            print(test_os.get_folder_path())
             if len(filePath) != 0:
                 if test_os.get_snippets_map(filePath, typed_keys):
                     snippets = test_os.get_snippets_map(filePath, typed_keys)
                     show_popup()
-            ctrl_pressed =False
+            ctrl_pressed = False
         elif hasattr(key, 'char') and key.char:
             if key.char.isalnum():
                 typed_keys += key.char
                 typed_keys_ln = len(typed_keys)
-                
+
         else:
             typed_keys = ''
         # if typed_keys.endswith('trig'):
@@ -38,15 +39,18 @@ def on_press(key):
     except AttributeError:
         typed_keys = ''
 
+
 def update_snippet_content(snippet_key):
     content.delete('1.0', tk.END)
     content.insert(tk.END, snippets[snippet_key])
+
 
 def on_select(event):
     index = listbox.curselection()
     if index:
         selected_snippet = listbox.get(index)
         update_snippet_content(selected_snippet)
+
 
 def insert_snippet1():
     index = listbox.curselection()
@@ -56,17 +60,20 @@ def insert_snippet1():
         pyautogui.press('backspace', presses=4)
         pyautogui.write(snippets[selected_snippet])
         popup.destroy()
-        
+
+
 def pynput_key_press(key):
     keyboard_controller.press(key)
     keyboard_controller.release(key)
-        
+
+
 def pynput_shortcut(key1, key2):
     keyboard_controller.press(key1)
     keyboard_controller.press(key2)
     keyboard_controller.release(key1)
     keyboard_controller.release(key2)
-        
+
+
 def insert_snippet():
     global typed_keys_ln
     index = listbox.curselection()
@@ -80,7 +87,7 @@ def insert_snippet():
         # Удаление триггера 'trig'
         for _ in range(typed_keys_ln+1):
             pynput_key_press(Key.backspace)
-        
+
         typed_keys_ln = 0
         # Ввод сниппета
         for char in snippet_text:
@@ -90,8 +97,9 @@ def insert_snippet():
             else:
                 pynput_key_press(char)
                 # pyautogui.write(char,interval=0)
-        
+
         popup.destroy()
+
 
 def show_popup():
     global popup, listbox, content
@@ -111,6 +119,7 @@ def show_popup():
     popup.bind('<Escape>', lambda e: popup.destroy())
     popup.focus_force()  # Фокус на popup
     listbox.focus_set()  # Фокусируемся на listbox
+
 
 root = tk.Tk()
 root.withdraw()

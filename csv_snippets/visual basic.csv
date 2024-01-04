@@ -6,3 +6,4 @@ vd,Dim varName As typeName
 vi,Set varName = value
 if,If Condition Then\n\nEnd If
 ifel,If Condition Then\n\nElse\n\nEnd If
+sc,Instr(1,strName,"pattern")

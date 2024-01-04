@@ -12,7 +12,6 @@ snippets: dict = {}
 ctrl_pressed = False
 keyboard_controller = Controller()
 
-
 def on_press(key):
     global typed_keys, ctrl_pressed, snippets, typed_keys_ln
     try:
@@ -20,18 +19,18 @@ def on_press(key):
             ctrl_pressed = True
         elif key == Key.space and ctrl_pressed:
 
-            filePath = test_os.pick_snippet_csv_file()
-            print(test_os.get_folder_path())
-            if len(filePath) != 0:
-                if test_os.get_snippets_map(filePath, typed_keys):
-                    snippets = test_os.get_snippets_map(filePath, typed_keys)
-                    show_popup()
+            # filePath = test_os.pick_snippet_csv_file()
+            snippets = test_os.get_snippets_from_csv_files(typed_keys)
+            # if len(filePath) != 0:
+            #     if test_os.get_snippets_map(filePath, typed_keys):
+            #         snippets = test_os.get_snippets_map(filePath, typed_keys)
+            if snippets:
+                show_popup()
             ctrl_pressed = False
         elif hasattr(key, 'char') and key.char:
             if key.char.isalnum():
                 typed_keys += key.char
                 typed_keys_ln = len(typed_keys)
-
         else:
             typed_keys = ''
         # if typed_keys.endswith('trig'):
@@ -39,18 +38,15 @@ def on_press(key):
     except AttributeError:
         typed_keys = ''
 
-
 def update_snippet_content(snippet_key):
     content.delete('1.0', tk.END)
     content.insert(tk.END, snippets[snippet_key])
-
 
 def on_select(event):
     index = listbox.curselection()
     if index:
         selected_snippet = listbox.get(index)
         update_snippet_content(selected_snippet)
-
 
 def insert_snippet1():
     index = listbox.curselection()
@@ -59,20 +55,17 @@ def insert_snippet1():
         pyautogui.hotkey('alt', 'tab')
         pyautogui.press('backspace', presses=4)
         pyautogui.write(snippets[selected_snippet])
-        popup.destroy()
-
+        popup.destroy()    
 
 def pynput_key_press(key):
     keyboard_controller.press(key)
     keyboard_controller.release(key)
-
 
 def pynput_shortcut(key1, key2):
     keyboard_controller.press(key1)
     keyboard_controller.press(key2)
     keyboard_controller.release(key1)
     keyboard_controller.release(key2)
-
 
 def insert_snippet():
     global typed_keys_ln

@@ -6,5 +6,4 @@ pip install pynput
 pip install keyboard
 pip install pywin32
 
-Get-Item
-
+python -m pip freeze > requirements.txt

@@ -1,6 +1,4 @@
-﻿si,string init
-sig,string init sig
-sf,string format
+﻿sf,string format
 fi,Sub funcName() \n\t
 vd,Dim varName As typeName
 vi,Set varName = value

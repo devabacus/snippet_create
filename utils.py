@@ -1,5 +1,7 @@
 from pynput.keyboard import Key, Controller
 import time
+import win32gui
+
 
 keyboard_controller = Controller()
 
@@ -21,7 +23,7 @@ def insert_snippet(listbox, snippets, popup):
 
         pynput_shortcut(Key.alt, Key.tab)
 
-        for _ in range(len(snippet_text)+1):
+        for _ in range(len(selected_snippet)+1):
             pynput_key_press(Key.backspace)
 
         for char in snippet_text:
@@ -32,3 +34,8 @@ def insert_snippet(listbox, snippets, popup):
                 pynput_key_press(char)
 
         popup.destroy()
+
+
+def get_window_name() -> str:
+    hwnd = win32gui.GetForegroundWindow()
+    return win32gui.GetWindowText(hwnd).casefold()

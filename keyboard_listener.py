@@ -2,9 +2,35 @@ from pynput.keyboard import Listener, Key, KeyCode
 import snippet_manager
 from ui_components import show_popup
 from utils import *
+import pyperclip
+
 
 typed_keys = ''
 ctrl_pressed = False
+commented = False
+
+def toggle_comment()->None:
+    global commented
+    #сохраняем содержимое буфера
+    original_clipboard = pyperclip.paste()
+    #выделяем и копируем первый символ в строке
+    pynput_key_press(Key.end) 
+    pynput_key_press(Key.home) 
+    pynput_shortcut(Key.shift, Key.right)
+    pynput_shortcut(Key.ctrl_l, 'c')
+    time.sleep(0.1)
+    first_char = pyperclip.paste()
+    print(first_char)
+    pyperclip.copy(original_clipboard)
+    if first_char != "'":
+        pynput_key_press(Key.left)
+        time.sleep(0.1) 
+        pynput_key_press("'") 
+        pynput_key_press(Key.down) 
+    else:
+        pynput_key_press(Key.backspace) 
+        pynput_key_press(Key.down) 
+        
 
 def on_press(key, root):
     global typed_keys, ctrl_pressed
@@ -12,10 +38,10 @@ def on_press(key, root):
         if key == Key.ctrl_l and ctrl_pressed == False         :
             ctrl_pressed = True
         elif ctrl_pressed and hasattr(key, 'vk') and key.vk == 191:
-            keyboard_controller.release(Key.ctrl_l)
-            pynput_key_press(Key.home) 
-            pynput_key_press("'")           # Нажимаем '
-            pynput_key_press(Key.down)
+            keyboard_controller.release(Key.ctrl_l)   
+            toggle_comment()
+            # pynput_key_press("'")           # Нажимаем '
+            # pynput_key_press(Key.down)
         elif key == Key.space and ctrl_pressed:
             snippets = snippet_manager.get_snippets(typed_keys)
             show_popup(snippets, root)

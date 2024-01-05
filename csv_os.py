@@ -1,11 +1,8 @@
 import os
 import csv
-import win32gui
+from utils import get_window_name
 
 
-def get_window_name() -> str:
-    hwnd = win32gui.GetForegroundWindow()
-    return win32gui.GetWindowText(hwnd).casefold()
 
 
 def get_folder_path(parent_folder_name: str) -> str:

@@ -7,3 +7,4 @@ pip install keyboard
 pip install pywin32
 
 python -m pip freeze > requirements.txt
+pip install -r requirements.txt

@@ -18,12 +18,7 @@ def on_press(key):
         if key == Key.ctrl_l:
             ctrl_pressed = True
         elif key == Key.space and ctrl_pressed:
-
-            # filePath = test_os.pick_snippet_csv_file()
             snippets = test_os.get_snippets_from_csv_files(typed_keys)
-            # if len(filePath) != 0:
-            #     if test_os.get_snippets_map(filePath, typed_keys):
-            #         snippets = test_os.get_snippets_map(filePath, typed_keys)
             if snippets:
                 show_popup()
             ctrl_pressed = False
@@ -33,8 +28,6 @@ def on_press(key):
                 typed_keys_ln = len(typed_keys)
         else:
             typed_keys = ''
-        # if typed_keys.endswith('trig'):
-        #     show_popup()
     except AttributeError:
         typed_keys = ''
 

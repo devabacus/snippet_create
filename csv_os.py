@@ -3,8 +3,6 @@ import csv
 from utils import get_window_name
 
 
-
-
 def get_folder_path(parent_folder_name: str) -> str:
     window_program_name = get_window_name()
     for folder_name in os.listdir(parent_folder_name):

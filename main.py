@@ -4,13 +4,14 @@ from pynput.keyboard import Key, Controller
 import tkinter as tk
 import pyautogui
 import win32gui
-import test_os
+import csv_os
+from pynput_handle import *
 
 typed_keys = ''
 typed_keys_ln = 0
-snippets: dict = {}
 ctrl_pressed = False
 keyboard_controller = Controller()
+snippets:dict = {}
 
 def on_press(key):
     global typed_keys, ctrl_pressed, snippets, typed_keys_ln
@@ -18,9 +19,8 @@ def on_press(key):
         if key == Key.ctrl_l:
             ctrl_pressed = True
         elif key == Key.space and ctrl_pressed:
-            snippets = test_os.get_snippets_from_csv_files(typed_keys)
-            if snippets:
-                show_popup()
+            snippets = csv_os.get_snippets_from_csv_files(typed_keys)
+            show_popup(snippets)
             ctrl_pressed = False
         elif hasattr(key, 'char') and key.char:
             if key.char.isalnum():
@@ -41,24 +41,7 @@ def on_select(event):
         selected_snippet = listbox.get(index)
         update_snippet_content(selected_snippet)
 
-def insert_snippet1():
-    index = listbox.curselection()
-    if index:
-        selected_snippet = listbox.get(index)
-        pyautogui.hotkey('alt', 'tab')
-        pyautogui.press('backspace', presses=4)
-        pyautogui.write(snippets[selected_snippet])
-        popup.destroy()    
 
-def pynput_key_press(key):
-    keyboard_controller.press(key)
-    keyboard_controller.release(key)
-
-def pynput_shortcut(key1, key2):
-    keyboard_controller.press(key1)
-    keyboard_controller.press(key2)
-    keyboard_controller.release(key1)
-    keyboard_controller.release(key2)
 
 def insert_snippet():
     global typed_keys_ln
@@ -84,10 +67,11 @@ def insert_snippet():
                 pynput_key_press(char)
                 # pyautogui.write(char,interval=0)
 
-        popup.destroy()
+        popup.destroy()    
 
 
-def show_popup():
+def show_popup(snippets:str):
+    if len(snippets) == 0: return 
     global popup, listbox, content
     x, y = pyautogui.position()
     popup = tk.Toplevel(root)

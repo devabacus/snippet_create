@@ -5,7 +5,7 @@ from utils import *
 from shortcut_handle import *
 
 from utils import get_window_name
-
+from shortcut_comment_handle import *
 
 typed_keys = ''
 ctrl_pressed = False
@@ -27,8 +27,9 @@ def on_press(key, root):
                 shift_pressed = True
             elif ctrl_pressed and hasattr(key, 'vk') and key.vk == 191:
                 keyboard_controller.release(Key.ctrl_l)
-                toggle_comment()
-            elif hasattr(key, 'vk') and key.vk == 66 and ctrl_pressed == True and shift_pressed==True and alt_pressed==True:
+                # toggle_one_raw_comment()
+                define_type_of_comment()
+            elif hasattr(key, 'vk') and key.vk == 66 and ctrl_pressed == True and shift_pressed == True and alt_pressed == True:
                 keyboard_controller.release(Key.alt_l)
                 keyboard_controller.release(Key.ctrl_l)
                 keyboard_controller.release(Key.shift)
@@ -51,6 +52,7 @@ def on_press(key, root):
         except AttributeError:
             typed_keys = ''
 
+
 def on_release(key):
     global ctrl_pressed, alt_pressed, shift_pressed
     if key == Key.ctrl_l:
@@ -60,8 +62,8 @@ def on_release(key):
     elif key == Key.shift:
         shift_pressed == False
 
+
 def start_keyboard_listener(root):
     listener = Listener(on_press=lambda key: on_press(
         key, root), on_release=on_release)
     listener.start()
-       

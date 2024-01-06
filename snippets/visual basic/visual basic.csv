@@ -1,8 +1,4 @@
 ﻿sf|string format
-fi|Sub funcName() \n\t
 vd|Dim varName As typeName
 vi|Set varName = value
-if|If Condition Then\n\nEnd If
-ifel|If Condition Then\n\nElse\n\nEnd If
-ifelif|If Condition Then\n\nElseIf Condition Then\n\nElse\n\nEnd If
 sc|Instr(1,strName,"pattern")

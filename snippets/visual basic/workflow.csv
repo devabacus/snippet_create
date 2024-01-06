@@ -1,0 +1,3 @@
+if|If Condition Then\n\nEnd If
+ifel|If Condition Then\n\nElse\n\nEnd If
+ifelif|If Condition Then\n\nElseIf Condition Then\n\nElse\n\nEnd If

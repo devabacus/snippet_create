@@ -24,6 +24,7 @@ def insert_snippet(typed_keys, listbox, snippets, popup):
         pynput_shortcut(Key.alt, Key.tab)
 
         for _ in range(len(typed_keys)):
+            time.sleep(0.1)
             pynput_key_press(Key.backspace)
 
         for char in snippet_text:

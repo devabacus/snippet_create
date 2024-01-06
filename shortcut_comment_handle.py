@@ -55,7 +55,6 @@ def toggle_one_raw_comment(one_raw:bool) -> bool:
     pynput_shortcut(Key.ctrl_l, 'c')
     time.sleep(0.1)
     first_char = pyperclip.paste()
-    print(first_char)
     pyperclip.copy(original_clipboard)
     commented = False
     if first_char != "'":

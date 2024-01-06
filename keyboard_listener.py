@@ -16,7 +16,6 @@ commented = False
 
 def on_press(key, root):
     global typed_keys, ctrl_pressed, shift_pressed, alt_pressed
-    # print(key)
     if "visual basic" in get_window_name():
         try:
             if key == Key.ctrl_l and ctrl_pressed == False:
@@ -42,7 +41,6 @@ def on_press(key, root):
                 snippets = snippet_manager.get_snippets(typed_keys)
                 show_popup(typed_keys, snippets, root)
                 ctrl_pressed = False
-                print(typed_keys)
                 typed_keys = ''
             elif hasattr(key, 'char') and key.char:
                 if key.char and key.char.isalnum():

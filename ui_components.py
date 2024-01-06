@@ -12,7 +12,7 @@ def on_select(event, listbox, content, snippets):
         selected_snippet = listbox.get(index)
         update_snippet_content(selected_snippet, content, snippets)
 
-def show_popup(snippets, root):
+def show_popup(typed_keys, snippets, root):
     if len(snippets) == 0: return 
     popup = tk.Toplevel(root)
     x, y = pyautogui.position()
@@ -31,7 +31,7 @@ def show_popup(snippets, root):
     listbox.select_set(0)
     on_select(None, listbox, content, snippets)
 
-    popup.bind('<Return>', lambda e: insert_snippet(listbox, snippets, popup))
+    popup.bind('<Return>', lambda e: insert_snippet(typed_keys, listbox, snippets, popup))
     popup.bind('<Escape>', lambda e: popup.destroy())
 
     popup.focus_force()

@@ -1,3 +1,4 @@
 if|If Condition Then\n\nEnd If
 ifel|If Condition Then\n\nElse\n\nEnd If
+ifel2|'This is a condition for if then\nIf Condition Then\n\nElse\n\nEnd If\n
 ifelif|If Condition Then\n\nElseIf Condition Then\n\nElse\n\nEnd If

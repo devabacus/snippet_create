@@ -17,6 +17,7 @@ def pynput_shortcut(key1, key2):
     keyboard_controller.release(key1)
 
 def insert_snippet(typed_keys, listbox, snippets, popup, comment_sym = ''):
+    
     index = listbox.curselection()
     if index:
         selected_snippet = listbox.get(index)

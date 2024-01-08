@@ -13,7 +13,7 @@ alt_pressed = False
 shift_pressed = False
 commented = False
 
-
+      
 def on_press(key, root):
     global typed_keys, ctrl_pressed, shift_pressed, alt_pressed
     if "visual basic" in get_window_name():

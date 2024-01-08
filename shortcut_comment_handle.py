@@ -3,10 +3,15 @@ from utils import *
 
 
 def comment_additional_raw(raw_num: int) -> None:
+    pynput_key_press(Key.left)
+    
     for _ in range(1, raw_num):
-        pynput_key_press(Key.left)
-        pynput_key_press("'")
         pynput_key_press(Key.down)
+        pynput_key_press("'")
+        pynput_key_press(Key.left)
+
+    pynput_key_press(Key.down)
+
 
 def uncomment_additional_raw(raw_num: int) -> None:
     for _ in range(1, raw_num):
@@ -24,10 +29,10 @@ def toggle_multi_raw_comment(raw_num: int) -> None:
             pynput_key_press(Key.delete)
             pynput_key_press(Key.up)
         pynput_key_press(Key.delete)
-            
+
     else:
         comment_additional_raw(raw_num)
-        
+
 
 # either block of raws or one raw need to comment
 def define_type_of_comment() -> None:
@@ -45,7 +50,8 @@ def define_type_of_comment() -> None:
     else:
         toggle_multi_raw_comment(raw_num)
 
-def toggle_one_raw_comment(one_raw:bool) -> bool:
+
+def toggle_one_raw_comment(one_raw: bool) -> bool:
     # сохраняем содержимое буфера
     original_clipboard = pyperclip.paste()
     # выделяем и копируем первый символ в строке
@@ -63,7 +69,7 @@ def toggle_one_raw_comment(one_raw:bool) -> bool:
         pynput_key_press("'")
         pynput_key_press(Key.down)
     else:
-        if(one_raw):
+        if (one_raw):
             pynput_key_press(Key.backspace)
             pynput_key_press(Key.down)
         commented = True

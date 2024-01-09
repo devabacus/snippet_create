@@ -16,6 +16,7 @@ def convert_to_snippet() -> str:
     # original_clipboard = pyperclip.paste()
     pynput_shortcut(Key.ctrl_l, 'c')
     data_for_snippet = pyperclip.paste()
+    print(repr(data_for_snippet))
     data_for_snippet = data_for_snippet.replace('\r\n', '\n')
     data_for_snippet = data_for_snippet.replace('\n', '\\n')
     # data_for_snippet = data_for_snippet.replace('\t', '\\t')

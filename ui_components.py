@@ -34,8 +34,8 @@ def on_select(event, listbox, content, snippets):
         update_snippet_content(selected_snippet, content, snippets)
 
 
-def modified_insert_snippet(typed_keys, listbox, snippets, popup, ctrl_enter = False):
-    if ctrl_enter:
+def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = False):
+    if comment:
         # почему то работает наоборот
         insert_snippet(typed_keys, listbox, snippets, popup)
     else:
@@ -71,7 +71,7 @@ def show_popup(typed_keys, snippets, root):
     popup.bind('<Return>', lambda e: modified_insert_snippet(
         typed_keys, listbox, snippets, popup))
     popup.bind('<c>', lambda e: modified_insert_snippet(
-        typed_keys, listbox, snippets, popup, ctrl_enter=True))
+        typed_keys, listbox, snippets, popup, comment=True))
     popup.bind('<Escape>', lambda e: popup.destroy())
 
     popup.focus_force()

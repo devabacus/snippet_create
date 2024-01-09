@@ -34,8 +34,8 @@ def on_select(event, listbox, content, snippets):
         update_snippet_content(selected_snippet, content, snippets)
 
 
-def modified_insert_snippet(typed_keys, listbox, snippets, popup, insert_comment_var, ctrl_enter = False):
-    if ctrl_enter or insert_comment_var.get():
+def modified_insert_snippet(typed_keys, listbox, snippets, popup, ctrl_enter = False):
+    if ctrl_enter:
         # почему то работает наоборот
         insert_snippet(typed_keys, listbox, snippets, popup)
     else:
@@ -56,7 +56,6 @@ def show_popup(typed_keys, snippets, root):
 
     listbox = tk.Listbox(popup)
     content = tk.Text(popup, height=10, width=40)
-    insert_comment_var = tk.IntVar()
 
     for key in snippets.keys():
         listbox.insert(tk.END, key)
@@ -66,18 +65,13 @@ def show_popup(typed_keys, snippets, root):
     listbox.pack(side=tk.LEFT, fill=tk.Y)
     content.pack(side=tk.RIGHT, fill=tk.Y)
 
-    # Checkbox for inserting comments
-    chkbox = tk.Checkbutton(frame, text="Insert Comment",
-                            variable=insert_comment_var)
-    chkbox.pack(side=tk.LEFT)
-
     listbox.select_set(0)
     on_select(None, listbox, content, snippets)
 
     popup.bind('<Return>', lambda e: modified_insert_snippet(
-        typed_keys, listbox, snippets, popup, insert_comment_var))
+        typed_keys, listbox, snippets, popup))
     popup.bind('<c>', lambda e: modified_insert_snippet(
-        typed_keys, listbox, snippets, popup, insert_comment_var, ctrl_enter=True))
+        typed_keys, listbox, snippets, popup, ctrl_enter=True))
     popup.bind('<Escape>', lambda e: popup.destroy())
 
     popup.focus_force()

@@ -12,11 +12,13 @@ def raw_duplicate() -> None:
     # pyperclip.copy(original_clipboard)
 
 
-def convert_to_snippet() -> None:
+def convert_to_snippet() -> str:
     # original_clipboard = pyperclip.paste()
     pynput_shortcut(Key.ctrl_l, 'c')
     data_for_snippet = pyperclip.paste()
     data_for_snippet = data_for_snippet.replace('\r\n', '\n')
     data_for_snippet = data_for_snippet.replace('\n', '\\n')
+    # data_for_snippet = data_for_snippet.replace('\t', '\\t')
     data_for_snippet = f'|{data_for_snippet}'
     pyperclip.copy(data_for_snippet)
+    return data_for_snippet

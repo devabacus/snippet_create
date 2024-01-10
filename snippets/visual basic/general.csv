@@ -1,3 +1,2 @@
-p1|MsgBox ""
-p1|MsgBox "" 'show alert dialog
+pw|MsgBox ""
 vdint|Dim varName As Integer

@@ -1,0 +1,1 @@
+dtc|Dim BirthDay As Date\nBirthDay = DateValue("10 / 01 / 2024")

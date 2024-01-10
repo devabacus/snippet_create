@@ -3,15 +3,11 @@ import time
 import win32gui
 import pyperclip
 
-
 keyboard_controller = Controller()
 
-
 def pynput_key_press(key):
-
     keyboard_controller.press(key)
     keyboard_controller.release(key)
-
 
 def pynput_shortcut(key1, key2):
     keyboard_controller.press(key1)
@@ -20,8 +16,6 @@ def pynput_shortcut(key1, key2):
     keyboard_controller.release(key1)
 
 # sometimes vba editor autocompleted the typed
-
-
 def get_ln_remove_chars(typed_keys: str) -> int:
     original_clipboard = pyperclip.paste()
     pynput_key_press(Key.end)

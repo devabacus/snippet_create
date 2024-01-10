@@ -1,3 +1,4 @@
 fi|Sub funcName() \n\t
 ppi|param As Integer
 pps|param As String
+p|MsgBox ""

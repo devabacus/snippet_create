@@ -1,5 +1,5 @@
 from pynput.keyboard import Listener, Key, KeyCode
-import snippet_manager
+import csv_os
 from ui_components import show_popup
 from utils import *
 from shortcut_handle import *
@@ -38,7 +38,7 @@ def on_press(key, root):
                 keyboard_controller.release(Key.ctrl_r)
                 raw_duplicate()
             elif key == Key.space and ctrl_pressed:
-                snippets = snippet_manager.get_snippets(typed_keys)
+                snippets = csv_os.get_snippets_from_csv_files(typed_keys)
                 show_popup(typed_keys, snippets, root)
                 ctrl_pressed = False
                 typed_keys = ''

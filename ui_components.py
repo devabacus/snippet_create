@@ -9,13 +9,6 @@ def update_snippet_content(snippet_key, content, snippets):
     content.insert(tk.END, snippet_text)
     apply_color_tag_from_char(content, "'", 'green')
 
-# def apply_color_tag_from_char(content, char, fg_color):
-#     start_index = content.search(char, '1.0', tk.END)
-#     if start_index:
-#         content.tag_config('highlight', foreground=fg_color)
-#         content.tag_add('highlight', start_index, tk.END)
-
-
 def apply_color_tag_from_char(content, char, fg_color):
     start_index = content.search(char, '1.0', tk.END)
     while start_index:
@@ -37,9 +30,10 @@ def on_select(event, listbox, content, snippets):
 def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = False):
     if comment:
         # почему то работает наоборот
-        insert_snippet(typed_keys, listbox, snippets, popup)
-    else:
         insert_snippet(typed_keys, listbox, snippets, popup, "'")
+        
+    else:
+        insert_snippet(typed_keys, listbox, snippets, popup)
         # Logic for when the checkbox is not checked
         pass
 

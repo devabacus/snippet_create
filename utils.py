@@ -50,8 +50,8 @@ def insert_snippet(typed_keys, listbox, snippets, popup, comment = ''):
         clean_snippet_text = ''
         if comment == '':
             clean_snippet_text = snippet_text
+            print(snippet_text)
         else:
-                
             start_del_ind = snippet_text.find(comment)
             end_del_ind = snippet_text.find('\n', start_del_ind)
             if end_del_ind == -1:

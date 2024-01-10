@@ -60,8 +60,10 @@ def insert_snippet(typed_keys, listbox, snippets, popup, comment = ''):
                 
             str_for_del = snippet_text[start_del_ind:end_del_ind]
             clean_snippet_text = snippet_text.replace(str_for_del, '')
+            print(repr(clean_snippet_text))
+            # if comment is the first raw
             if comment and snippet_text.find(comment) == 0:
-                pynput_key_press(Key.delete)
+                clean_snippet_text = clean_snippet_text[1:]
             
         time.sleep(0.1)
         pyperclip.copy(clean_snippet_text)

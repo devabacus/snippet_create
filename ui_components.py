@@ -29,7 +29,7 @@ def on_select(event, listbox, content, snippets):
 
 def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = False):
     if comment:
-        # почему то работает наоборот
+        # remove comment line
         insert_snippet(typed_keys, listbox, snippets, popup, "'")
         
     else:

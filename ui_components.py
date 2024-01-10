@@ -27,15 +27,8 @@ def on_select(event, listbox, content, snippets):
         update_snippet_content(selected_snippet, content, snippets)
 
 
-def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = False):
-    if comment:
-        # remove comment line
-        insert_snippet(typed_keys, listbox, snippets, popup, "'")
-        
-    else:
-        insert_snippet(typed_keys, listbox, snippets, popup)
-        # Logic for when the checkbox is not checked
-        pass
+def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = ''):
+    insert_snippet(typed_keys, listbox, snippets, popup, comment)
 
 
 def show_popup(typed_keys, snippets, root):
@@ -62,10 +55,9 @@ def show_popup(typed_keys, snippets, root):
     listbox.select_set(0)
     on_select(None, listbox, content, snippets)
 
-    popup.bind('<Return>', lambda e: modified_insert_snippet(
-        typed_keys, listbox, snippets, popup))
-    popup.bind('<c>', lambda e: modified_insert_snippet(
-        typed_keys, listbox, snippets, popup, comment=True))
+    popup.bind('<Return>', lambda e: insert_snippet(typed_keys, listbox, snippets, popup, comment=''))
+    popup.bind('<c>', lambda e: insert_snippet(
+        typed_keys, listbox, snippets, popup, comment="'"))
     popup.bind('<Escape>', lambda e: popup.destroy())
 
     popup.focus_force()

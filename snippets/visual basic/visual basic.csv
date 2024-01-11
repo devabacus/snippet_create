@@ -1,4 +1,3 @@
-﻿sf|string format
-vd|Dim varName As typeName
+﻿vd|Dim varName As typeName
 vi|Set varName = value
-sc|Instr(1,strName,"pattern")
+

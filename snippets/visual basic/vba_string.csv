@@ -1,1 +1,2 @@
 sf|"text" & varname
+sc|Instr(1,strName,"pattern")

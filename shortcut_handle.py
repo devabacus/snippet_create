@@ -15,6 +15,7 @@ def raw_duplicate() -> None:
 def convert_to_snippet() -> str:
     # original_clipboard = pyperclip.paste()
     pynput_shortcut(Key.ctrl_l, 'c')
+    time.sleep(0.1)
     data_for_snippet = pyperclip.paste()
     print(repr(data_for_snippet))
     data_for_snippet = data_for_snippet.replace('\r\n', '\n')

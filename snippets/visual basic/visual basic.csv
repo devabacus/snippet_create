@@ -1,3 +1,4 @@
-﻿vd|Dim varName As typeName
+﻿v|Dim var As Variant
+vd|Dim varName As typeName
 vi|Set varName = value
 

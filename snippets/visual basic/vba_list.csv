@@ -1,6 +1,8 @@
 ld|Dim mArr()
+ldt|Dim arr() As Integer
 lds|'Declared with size of 5\nDim mArr(5)
 ldi|Dim mArr()\nmArr = Array("apple", "Orange", "Grapes")
 li|Dim mArr()\nmArr = Array("apple", "Orange", "Grapes")
 lgi|mArr(index)
-ll|UBound(mArr)
+ll|UBound(mArr) - LBound(mArr) + 1
+lts|mstr = Join(mArr, ",")

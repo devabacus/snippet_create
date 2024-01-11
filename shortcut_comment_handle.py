@@ -6,8 +6,8 @@ def comment_additional_raw(raw_num: int) -> None:
     pynput_key_press(Key.left)
     
     for _ in range(1, raw_num):
-        pynput_key_press(Key.down)
         pynput_key_press("'")
+        pynput_key_press(Key.down)
         pynput_key_press(Key.left)
 
     pynput_key_press(Key.down)

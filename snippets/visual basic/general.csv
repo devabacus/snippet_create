@@ -1,2 +1,2 @@
-
-vdint|Dim varName As Integer
+p|MsgBox ""
+pf|MsgBox "text" & varName

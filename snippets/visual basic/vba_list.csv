@@ -1,0 +1,6 @@
+ld|Dim mArr()
+lds|'Declared with size of 5\nDim mArr(5)
+ldi|Dim mArr()\nmArr = Array("apple", "Orange", "Grapes")
+li|Dim mArr()\nmArr = Array("apple", "Orange", "Grapes")
+lgi|mArr(index)
+ll|UBound(mArr)

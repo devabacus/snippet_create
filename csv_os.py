@@ -15,16 +15,17 @@ def get_snippets_from_csv_files(search_text: str) -> dict:
     snippets = {}
     program_folder = get_folder_path('snippets')
     try:
+        
         for csv_file in os.listdir(program_folder):
             file_path = os.path.join(program_folder, csv_file)
             new_item_snippet = get_snippets_map(file_path, search_text)
-            sorted_snippet = sort_snippet(new_item_snippet, search_text)
-            snippets.update(sorted_snippet)
+            snippets.update(new_item_snippet)
+        sorted_snippet = sort_snippet(snippets, search_text)
     except FileNotFoundError:
         print("Directory not found:", program_folder)
     except Exception as e:
         print("An error occurred:", e)
-    return snippets
+    return sorted_snippet
 
 def custom_sort_key(item):
     # Сортировка сначала по длине ключа, затем по алфавиту

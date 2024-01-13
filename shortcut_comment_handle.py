@@ -9,7 +9,8 @@ def comment_additional_raw(raw_num: int) -> None:
         pynput_key_press("'")
         pynput_key_press(Key.down)
         pynput_key_press(Key.left)
-
+        # TODO нужно через копирования в буфер сделать
+        # т.е. копируем, заменяем /n на '/n и вставляем обратно
     pynput_key_press(Key.down)
 
 

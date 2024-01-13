@@ -3,17 +3,16 @@ import csv
 from utils import get_window_name
 
 
-def get_folder_path(parent_folder_name: str) -> str:
-    window_program_name = get_window_name()
+def get_folder_path(parent_folder_name: str, program_name:str) -> str:
     for folder_name in os.listdir(parent_folder_name):
-        if folder_name in window_program_name:
+        if folder_name in program_name:
             return os.path.join(parent_folder_name, folder_name)
     return ""
 
 
-def get_snippets_from_csv_files(search_text: str) -> dict:
+def get_snippets_from_csv_files(search_text: str, program_name:str) -> dict:
     snippets = {}
-    program_folder = get_folder_path('snippets')
+    program_folder = get_folder_path('snippets', program_name)
     try:
         
         for csv_file in os.listdir(program_folder):

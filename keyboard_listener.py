@@ -13,10 +13,12 @@ alt_pressed = False
 shift_pressed = False
 commented = False
 
-      
+
 def on_press(key, root):
     global typed_keys, ctrl_pressed, shift_pressed, alt_pressed
-    if "visual basic" in get_window_name():
+    # print(get_window_name())
+    program_name = get_window_name()
+    if "visual basic" in program_name or "конфигуратор" in program_name:
         try:
             if key == Key.ctrl_l and ctrl_pressed == False:
                 ctrl_pressed = True
@@ -38,8 +40,9 @@ def on_press(key, root):
                 keyboard_controller.release(Key.ctrl_r)
                 raw_duplicate()
             elif key == Key.space and ctrl_pressed:
-                snippets = csv_os.get_snippets_from_csv_files(typed_keys)
-                show_popup(typed_keys, snippets, root)
+                snippets = csv_os.get_snippets_from_csv_files(
+                    typed_keys, program_name)
+                show_popup(typed_keys, snippets, root, program_name)
                 ctrl_pressed = False
                 typed_keys = ''
             elif hasattr(key, 'char') and key.char:

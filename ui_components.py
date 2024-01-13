@@ -31,7 +31,7 @@ def modified_insert_snippet(typed_keys, listbox, snippets, popup, comment = ''):
     insert_snippet(typed_keys, listbox, snippets, popup, comment)
 
 
-def show_popup(typed_keys, snippets, root):
+def show_popup(typed_keys, snippets, root, program_name):
     if len(snippets) == 0:
         return
     popup = tk.Toplevel(root)
@@ -55,9 +55,9 @@ def show_popup(typed_keys, snippets, root):
     listbox.select_set(0)
     on_select(None, listbox, content, snippets)
 
-    popup.bind('<c>', lambda e: insert_snippet(typed_keys, listbox, snippets, popup, comment=''))
+    popup.bind('<c>', lambda e: insert_snippet(typed_keys, listbox, snippets, popup, program_name, comment=''))
     popup.bind('<Return>', lambda e: insert_snippet(
-        typed_keys, listbox, snippets, popup, comment="'"))
+        typed_keys, listbox, snippets, popup, program_name, comment="'"))
     popup.bind('<Escape>', lambda e: popup.destroy())
 
     popup.focus_force()
